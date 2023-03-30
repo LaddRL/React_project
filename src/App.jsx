@@ -1,56 +1,48 @@
-import React, { Component } from 'react';
-import './App.css';
-import  FilmList  from "./components/filmsList";
+import React, { useState } from "react";
+import "./App.css";
+import FilmList from "./components/filmsList";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  
-    this.state = {
-      list: ["ready", "set", "GO"],
-      text: "",
-    };
+function App(props) {
+  let [list, setList] = useState(["ready", "set", "GO"]);
+  let [text, setText] = useState("");
 
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onSubmit(event) {
+  function onSubmit(event) {
     event.preventDefault();
+    setList([...list, text]);
+    setText("");
 
-    let newList = [...this.state.list, this.state.text];
-    this.setState({ list: newList, text: "" })
+    let newList = [...list, text];
+    setList(newList);
+    setText("");
   }
 
-  render() {
-    return (
-      <div>
-        <h1>Hello World!</h1>
-        <form onSubmit={this.onSubmit}>
-        <input 
-        type="text" 
-        name="text" 
-        id="text" 
-        value={this.state.text} 
-        onChange={(event) => this.setState({ text: event.target.value})} 
+  return (
+    <div>
+      <h1>Hello World!</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          name="text"
+          id="text"
+          value={text}
+          onChange={(event) => setText(event.target.value)}
         />
         <button type="submit">Add</button>
-        </form>
-        <ul>
-          {this.state.list.map((item, index) => {
-            return <li key={item + index}>{item}</li>;
-          })}
-        </ul>
-        <FilmList />
-      </div>
-    )
-  }
+      </form>
+      <ul>
+        {list.map((item, index) => {
+          return <li key={index}>{item}</li>;
+        })}
+      </ul>
+      <FilmList />
+    </div>
+  );
 }
-
 
 // class App extends Component {
 //   constructor(props) {
 //     super(props);
-    
+
 //     this.state = {
 //       list: ["ready", "set", "GO"],
 //       text: "",
@@ -88,6 +80,5 @@ class App extends Component {
 //     );
 //   }
 // }
-
 
 export default App;
