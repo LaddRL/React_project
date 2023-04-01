@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function FilmsList() {
+function FilmsPage(props) {
   let [list, setList] = useState([]);
 
   function getFilms() {
@@ -22,12 +22,15 @@ function FilmsList() {
   }, []);
 
   return (
-    <ul>
-      {list.map((film) => {
-        return <li key={film.id}>{film.title}</li>;
-      })}
-    </ul>
+    <div>
+      <h1>Studio Ghibli Films</h1>
+      <ul>
+        {list.map((film) => {
+          return <li key={film.id}>{film.title}</li>;
+        })}
+      </ul>
+    </div>
   );
 }
 
-export default FilmsList;
+export default FilmsPage;
