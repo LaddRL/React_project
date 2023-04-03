@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function HomePage(props) {
+export function HomePage(props) {
   let [list, setList] = useState(["ready", "set", "GO"]);
   let [text, setText] = useState("");
 
